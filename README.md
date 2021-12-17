@@ -1,2 +1,2 @@
 # NordicCauldron
-Examens Arbete WIE20g - Niklas Hådell
+Examensarbete WIE20g - Niklas Hådell

@@ -1,0 +1,76 @@
+{
+    "product": [
+        {
+            "id": "test1",
+            "index": "namn på produkt",
+            "name": "Namn på produkt",
+            "desc": "Bekrivining av produkt",
+            "price": 1000,
+            "category": "",
+            "featured": ""
+        },
+        {
+            "id": "test2",
+            "index": "namn på produkt",
+            "name": "Namn på produkt",
+            "desc": "Bekrivining av produkt",
+            "price": 2000,
+            "category": "",
+            "featured": ""
+        },
+        {
+            "id": "test3",
+            "index": "namn på produkt",
+            "name": "Namn på produkt",
+            "desc": "Bekrivining av produkt",
+            "price": 2000,
+            "category": "",
+            "featured": ""
+        },
+        {
+            "id": "test4",
+            "index": "namn på produkt",
+            "name": "Namn på produkt",
+            "desc": "Bekrivining av produkt",
+            "price": 2000,
+            "category": "",
+            "featured": ""
+        },
+        {
+            "id": "test5",
+            "index": "namn på produkt",
+            "name": "Namn på produkt",
+            "desc": "Bekrivining av produkt",
+            "price": 2000,
+            "category": "",
+            "featured": ""
+        },
+        {
+            "id": "test6",
+            "index": "namn på produkt",
+            "name": "Namn på produkt",
+            "desc": "Bekrivining av produkt",
+            "price": 2000,
+            "category": "",
+            "featured": ""
+        },
+        {
+            "id": "test7",
+            "index": "namn på produkt",
+            "name": "Namn på produkt",
+            "desc": "Bekrivining av produkt",
+            "price": 2000,
+            "category": "",
+            "featured": ""
+        },
+        {
+            "id": "test8",
+            "index": "namn på produkt",
+            "name": "Namn på produkt",
+            "desc": "Bekrivining av produkt",
+            "price": 2000,
+            "category": "",
+            "featured": ""
+        }
+    ]
+}

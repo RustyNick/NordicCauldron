@@ -1,15 +1,22 @@
 import './App.css';
-import Header from './components/header';
-import Customers from './components/customers/customers';
-import Button from '@material-ui/core/Button'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Header from './components/header'
+import Home from './pages/home'
+import Cart from './pages/cart';
+import ErrorPage from './pages/errorPage';
 
 function App() {
   return (
-    <div className="App">
+    <Router>
       <Header />
-      <Customers />
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/cart' element={<Cart />} />
+        <Route path='*' element={<ErrorPage />} />
 
-    </div>
+      </Routes>
+    </Router>
   );
 }
 

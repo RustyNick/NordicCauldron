@@ -2,18 +2,19 @@ import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Logo from '../NordicCauldron-greyLogo.png'
+import magicka from '../Magicka_logo.png'
 class Feature extends React.Component {
     render() {
         return (
 
             <div style={{ width: '100%', backgroundColor: 'lightgreen' }}>
-                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                <div id="carouselExampleControls" className="carousel slide" data-ride="carousel">
                     <div className="carousel-inner">
                         <div className="carousel-item active">
                             <img className="d-block w-100" src={Logo} alt="First slide" />
                         </div>
-                        <div class="carousel-item">
-                            <img className="d-block w-100" src={Logo} alt="Second slide" />
+                        <div className="carousel-item">
+                            <img className="d-block w-100" src={magicka} alt="Second slide" />
                         </div>
                         <div className="carousel-item">
                             <img className="d-block w-100" src={Logo} alt="Third slide" />

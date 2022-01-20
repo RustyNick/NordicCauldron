@@ -1,38 +1,37 @@
 import React from 'react'
 
 class Product extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            products: []
-        }
-    }
 
-    componentDidMount() {
-        fetch('/api/product')
-            .then(res => res.json())
-            .then(products => this.setState({ products }, () => console.log('product fetched...', products)));
-    }
+    /*     async componentDidMount() {
+            const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-type': 'application/json' },
+                body: JSON.stringify({ title: 'my newly added text' })
+            };
+     
+            const response = await fetch('/api/user/:id', requestOptions);
+            const data = await response.json()
+            this.setState({ cart: data })
+            return
+        } */
+
+
 
     render() {
         return (
-            <div style={{ width: '60%', display: 'flex', flexDirection: 'column', flexWrap: 'wrap', justifyContent: 'center', margin: 'auto', }}>
-                <ul style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'left', padding: '0', }}>
-                    {this.state.products.map(item =>
-                        <li key={item.id} style={{ height: '100%', Width: '100%', maxWidth: '250px', flexGrow: '2', display: 'flex', flexDirection: 'column', listStyle: 'none', backgroundColor: '#282c34', margin: '10px', padding: '10px', color: 'whitesmoke', alignItems: 'center', }}>
-
-                            <h4>
-                                {item.name}
-                            </h4>
-                            <p>
-                                {item.desc}
-                            </p>
-                            price: {item.price} kr
-                            <button type='button' className='btn btn-success' style={{ width: '70%', margin: '10px 0px', }}>Lägg till i varukorg</button>
-                        </li>
-                    )}
-                </ul>
-            </div >
+            <div style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                backgroundColor: 'grey',
+                margin: '10px',
+                padding: '10px',
+            }}>
+                <h2>{this.props.name}</h2>
+                <p>{this.props.desc}</p>
+                <h4>{this.props.price}</h4>
+                <button className='btn btn-primary'>Lägg till</button>
+            </div>
         )
     }
 }

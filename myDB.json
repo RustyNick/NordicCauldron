@@ -6,7 +6,7 @@
             "name": "Namn på produkt",
             "desc": "Bekrivining av produkt",
             "price": 1000,
-            "category": "",
+            "category": "1",
             "featured": ""
         },
         {
@@ -15,7 +15,7 @@
             "name": "Namn på produkt",
             "desc": "Bekrivining av produkt",
             "price": 2000,
-            "category": "",
+            "category": "1",
             "featured": ""
         },
         {
@@ -24,7 +24,7 @@
             "name": "Namn på produkt",
             "desc": "Bekrivining av produkt",
             "price": 2000,
-            "category": "",
+            "category": "1",
             "featured": ""
         },
         {
@@ -33,7 +33,7 @@
             "name": "Namn på produkt",
             "desc": "Bekrivining av produkt",
             "price": 2000,
-            "category": "",
+            "category": "2",
             "featured": ""
         },
         {
@@ -42,7 +42,7 @@
             "name": "Namn på produkt",
             "desc": "Bekrivining av produkt",
             "price": 2000,
-            "category": "",
+            "category": "2",
             "featured": ""
         },
         {
@@ -51,7 +51,7 @@
             "name": "Namn på produkt",
             "desc": "Bekrivining av produkt",
             "price": 2000,
-            "category": "",
+            "category": "2",
             "featured": ""
         },
         {
@@ -60,7 +60,7 @@
             "name": "Namn på produkt",
             "desc": "Bekrivining av produkt",
             "price": 2000,
-            "category": "",
+            "category": "2",
             "featured": ""
         },
         {
@@ -69,8 +69,24 @@
             "name": "Namn på produkt",
             "desc": "Bekrivining av produkt",
             "price": 2000,
-            "category": "",
+            "category": "3",
             "featured": ""
+        }
+    ],
+    "user": [
+        {
+            "id": "1",
+            "customerId": "TESTID",
+            "role": "admin",
+            "username": "Admin",
+            "password": "Lösenord",
+            "email": "E-mail",
+            "adress": "Adress",
+            "zip": "Zip",
+            "city": "Stad",
+            "country": "Land",
+            "cart": [],
+            "previousOrder": []
         }
     ]
 }

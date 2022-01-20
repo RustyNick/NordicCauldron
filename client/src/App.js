@@ -5,6 +5,7 @@ import Header from './components/header'
 import Home from './pages/home'
 import Cart from './pages/cart';
 import ErrorPage from './pages/errorPage';
+import Profile from './pages/profile';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Header />
       <Routes>
         <Route path='/' element={<Home />} />
+        <Route path='/profile' element={<Profile />} />
         <Route path='/cart' element={<Cart />} />
         <Route path='*' element={<ErrorPage />} />
 

@@ -3,7 +3,7 @@ const express = require("express");
 const cors = require('cors')
 const app = express();
 
-
+app.use(cors())
 const path = require('path');
 
 // ** MIDDLEWARE ** //
@@ -63,15 +63,19 @@ app.post("/api/user/:id", (req, res) => {
 app.use(express.static('public'));
 app.use('/images', express.static('images'));
 
+
+app.use(express.static(path.join(__dirname, "client/build")));
+
+app.get('*', (req, res) => {
+    req.sendFile(path.join(__dirname, "client/build", "index.html"))
+});
+
+
+
+
 const PORT = process.env.PORT || 3001;
 
-if (process.env.NODE_ENV === "production") {
-    app.use(express.static(path.join(__dirname, "client/build")));
 
-    app.get('*', (req, res) => {
-        req.sendFile(path.join(__dirname, "client/build", "index.html"))
-    });
-}
 
 app.listen(PORT, () => {
     console.log(`Server listening on ${PORT}`);

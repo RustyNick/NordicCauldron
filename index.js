@@ -1,9 +1,26 @@
 const fs = require('fs');
 const express = require("express");
+const cors = require('cors')
 const app = express();
 
 
 const path = require('path');
+
+// ** MIDDLEWARE ** //
+const whitelist = ['http://localhost:3000', 'http://localhost:3001', 'https://nordiccauldron.herokuapp.com/']
+const corsOptions = {
+    origin: function (origin, callback) {
+        console.log("** Origin of request " + origin)
+        if (whitelist.indexOf(origin) !== -1 || !origin) {
+            console.log("Origin acceptable")
+            callback(null, true)
+        } else {
+            console.log("Origin rejected")
+            callback(new Error('Not allowed by CORS'))
+        }
+    }
+}
+app.use(cors(corsOptions))
 
 
 
@@ -48,12 +65,13 @@ app.use('/images', express.static('images'));
 
 const PORT = process.env.PORT || 3001;
 
-/* if (process.env.NODE_ENV === "production") {
-    app.use(express.static("public"));
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static(path.join(__dirname, "client/build")));
+
     app.get('*', (req, res) => {
-        req.sendFile(path.resolve(__dirname, "public", "index.html"))
-    })
-} */
+        req.sendFile(path.join(__dirname, "client/build", "index.html"))
+    });
+}
 
 app.listen(PORT, () => {
     console.log(`Server listening on ${PORT}`);

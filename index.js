@@ -48,12 +48,12 @@ app.use('/images', express.static('images'));
 
 const PORT = process.env.PORT || 3001;
 
-if (process.env.NODE_ENV === "production") {
+/* if (process.env.NODE_ENV === "production") {
     app.use(express.static("public"));
     app.get('*', (req, res) => {
-        req.sendFile(path.resolve(__dirname, "./client/public", "index.html"))
+        req.sendFile(path.resolve(__dirname, "public", "index.html"))
     })
-}
+} */
 
 app.listen(PORT, () => {
     console.log(`Server listening on ${PORT}`);

@@ -1,7 +1,11 @@
 const fs = require('fs');
 const express = require("express");
-
 const app = express();
+
+
+const path = require('path');
+
+
 
 app.get("/api/product", (req, res) => {
     let raw = fs.readFileSync("myDB.json")
@@ -43,6 +47,13 @@ app.use(express.static('public'));
 app.use('/images', express.static('images'));
 
 const PORT = process.env.PORT || 3001;
+
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static("public"));
+    app.get('*', (req, res) => {
+        req.sendFile(path.resolve(__dirname, "./client/public", "index.html"))
+    })
+}
 
 app.listen(PORT, () => {
     console.log(`Server listening on ${PORT}`);

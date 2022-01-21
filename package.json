@@ -1,0 +1,29 @@
+{
+  "name": "nordiccauldron",
+  "version": "1.0.0",
+  "description": "examensarbete klass: WIE20G",
+  "main": "index.js",
+  "scripts": {
+    "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwarp && npm run build",
+    "client-install": "cd client && npm install",
+    "start": "node index.js",
+    "server": "nodemon index.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RustyNick/NordicCauldron.git"
+  },
+  "author": "Niklas Hådell",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RustyNick/NordicCauldron/issues"
+  },
+  "homepage": "https://github.com/RustyNick/NordicCauldron#readme",
+  "dependencies": {
+    "concurrently": "^6.5.0",
+    "express": "^4.17.2",
+    "nodemon": "^2.0.15"
+  }
+}

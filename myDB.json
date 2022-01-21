@@ -1,0 +1,92 @@
+{
+    "product": [
+        {
+            "id": "test1",
+            "index": "namn på produkt",
+            "name": "Namn på produkt",
+            "desc": "Bekrivining av produkt",
+            "price": 1000,
+            "category": "1",
+            "featured": ""
+        },
+        {
+            "id": "test2",
+            "index": "namn på produkt",
+            "name": "Namn på produkt",
+            "desc": "Bekrivining av produkt",
+            "price": 2000,
+            "category": "1",
+            "featured": ""
+        },
+        {
+            "id": "test3",
+            "index": "namn på produkt",
+            "name": "Namn på produkt",
+            "desc": "Bekrivining av produkt",
+            "price": 2000,
+            "category": "1",
+            "featured": ""
+        },
+        {
+            "id": "test4",
+            "index": "namn på produkt",
+            "name": "Namn på produkt",
+            "desc": "Bekrivining av produkt",
+            "price": 2000,
+            "category": "2",
+            "featured": ""
+        },
+        {
+            "id": "test5",
+            "index": "namn på produkt",
+            "name": "Namn på produkt",
+            "desc": "Bekrivining av produkt",
+            "price": 2000,
+            "category": "2",
+            "featured": ""
+        },
+        {
+            "id": "test6",
+            "index": "namn på produkt",
+            "name": "Namn på produkt",
+            "desc": "Bekrivining av produkt",
+            "price": 2000,
+            "category": "2",
+            "featured": ""
+        },
+        {
+            "id": "test7",
+            "index": "namn på produkt",
+            "name": "Namn på produkt",
+            "desc": "Bekrivining av produkt",
+            "price": 2000,
+            "category": "2",
+            "featured": ""
+        },
+        {
+            "id": "test8",
+            "index": "namn på produkt",
+            "name": "Namn på produkt",
+            "desc": "Bekrivining av produkt",
+            "price": 2000,
+            "category": "3",
+            "featured": ""
+        }
+    ],
+    "user": [
+        {
+            "id": "1",
+            "customerId": "TESTID",
+            "role": "admin",
+            "username": "Admin",
+            "password": "Lösenord",
+            "email": "E-mail",
+            "adress": "Adress",
+            "zip": "Zip",
+            "city": "Stad",
+            "country": "Land",
+            "cart": [],
+            "previousOrder": []
+        }
+    ]
+}

@@ -1,41 +1,56 @@
-import React, { Component } from 'react'
-import Product from './product';
+import React from 'react'
+import ItemProduct from './ItemProduct';
+import './productList.css'
 
+class ProductList extends React.Component {
+    //function ProductList({ onGetProduct, product, cart, onAddToCart }) {
+    constructor(props) {
+        super(props)
+        this.state = {
+            list: []
+        }
 
-
-export class ProductList extends Component {
-
-    state = {
-        products: [],
     }
 
-    componentDidMount() {
+    componentDidMount = () => {
         fetch('/api/product')
             .then(res => res.json())
-            .then(products => this.setState({ products }, () => console.log('product fetched...', products)));
+            .then(list => this.setState({ list }))
+
     }
 
     render() {
+
         return (
-            <div
-                style={{
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                    justifyContent: 'left',
 
-                }}>
-                {this.state.products.map(product =>
-                    <Product
-                        key={product.id}
-                        id={product.id}
-                        name={product.name}
-                        desc={product.desc}
-                        item={product}
-                        price={product.price} />
-                )}
-            </div>
-        )
+            <div className='list-main' >
+                <ul className='list-ul'>
+
+                    {this.state.list.map((item) =>
+                        <li className='list-li'
+                            key={item.id} >
+                            <div className='list-li-inner'>
+                                <ItemProduct item={item} />
+                                <button className='list-button btn-primary'
+                                    onClick={() => this.props.onAddToCart(item)}
+                                >
+                                    Add to cart
+                                </button>
+
+                            </div>
+                        </li>
+                    )}
+                </ul>
+
+
+            </div >
+
+        );
+
     }
-}
 
-export default ProductList
+};
+
+export default ProductList;
+
+

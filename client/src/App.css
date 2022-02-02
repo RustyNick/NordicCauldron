@@ -1,3 +1,4 @@
+
 .App {
   text-align: center;
 }
@@ -14,18 +15,27 @@ nav{
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   list-style: none;
   width: 100%;
-  padding:10px;
+  padding: 0px 10px;
+  font-size: 2em;
   display: flex;
   justify-content: space-around;
   align-items: center;
   text-decoration: none;
-  background-color: lightgreen;
   color:Tomato;
   transition: 0.4s;
 }
 .nav-links:hover{
-  background-color: tomato;
   color:lightgreen;
-
 }
 
+.nav-counter{
+  position: relative;
+  top:-10px;
+  left:-5px;
+  font-size: 0.8rem;
+  margin:0px;
+  padding: 0px 5px;
+  background-color: red;
+  color: whitesmoke;
+  border-radius: 5px;
+}

@@ -1,7 +1,7 @@
 {
     "product": [
         {
-            "id": "test1",
+            "id": 1,
             "index": "namn på produkt",
             "name": "Namn på produkt",
             "desc": "Bekrivining av produkt",
@@ -10,7 +10,7 @@
             "featured": ""
         },
         {
-            "id": "test2",
+            "id": 2,
             "index": "namn på produkt",
             "name": "Namn på produkt",
             "desc": "Bekrivining av produkt",
@@ -19,7 +19,7 @@
             "featured": ""
         },
         {
-            "id": "test3",
+            "id": 3,
             "index": "namn på produkt",
             "name": "Namn på produkt",
             "desc": "Bekrivining av produkt",
@@ -28,7 +28,7 @@
             "featured": ""
         },
         {
-            "id": "test4",
+            "id": 4,
             "index": "namn på produkt",
             "name": "Namn på produkt",
             "desc": "Bekrivining av produkt",
@@ -37,7 +37,7 @@
             "featured": ""
         },
         {
-            "id": "test5",
+            "id": 5,
             "index": "namn på produkt",
             "name": "Namn på produkt",
             "desc": "Bekrivining av produkt",
@@ -46,7 +46,7 @@
             "featured": ""
         },
         {
-            "id": "test6",
+            "id": 6,
             "index": "namn på produkt",
             "name": "Namn på produkt",
             "desc": "Bekrivining av produkt",
@@ -55,7 +55,7 @@
             "featured": ""
         },
         {
-            "id": "test7",
+            "id": 7,
             "index": "namn på produkt",
             "name": "Namn på produkt",
             "desc": "Bekrivining av produkt",
@@ -64,7 +64,7 @@
             "featured": ""
         },
         {
-            "id": "test8",
+            "id": 8,
             "index": "namn på produkt",
             "name": "Namn på produkt",
             "desc": "Bekrivining av produkt",
@@ -79,8 +79,36 @@
             "customerId": "TESTID",
             "role": "admin",
             "username": "Admin",
-            "password": "Lösenord",
-            "email": "E-mail",
+            "password": "test",
+            "email": "email@email.com",
+            "adress": "Adress",
+            "zip": "Zip",
+            "city": "Stad",
+            "country": "Land",
+            "cart": [],
+            "previousOrder": []
+        },
+        {
+            "id": "_q9m96e9ww",
+            "customerId": "TESTID",
+            "role": "customer",
+            "username": "nix",
+            "password": "$2b$10$U.UbmwO9HH48s9NXvhMWk.iaAN5121aqTUMOZQDHhNIhUxVi6uyym",
+            "email": "nix@nix.nix",
+            "adress": "Adress",
+            "zip": "Zip",
+            "city": "Stad",
+            "country": "Land",
+            "cart": [],
+            "previousOrder": []
+        },
+        {
+            "id": "_m21ugg3sa",
+            "customerId": "TESTID",
+            "role": "customer",
+            "username": "niklas",
+            "password": "$2b$10$3GjCbTV.VkGksSy3i6hfrOaVnjKJiceFn5yPeFbsT55Go4AmVdubC",
+            "email": "niklas@niklas.se",
             "adress": "Adress",
             "zip": "Zip",
             "city": "Stad",

@@ -1,25 +1,40 @@
+
+//css or design
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Header from './components/header'
-import Home from './pages/home'
-import Cart from './pages/cart';
-import ErrorPage from './pages/errorPage';
-import Profile from './pages/profile';
 
-function App() {
-  return (
-    <Router>
-      <Header />
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/profile' element={<Profile />} />
-        <Route path='/cart' element={<Cart />} />
-        <Route path='*' element={<ErrorPage />} />
+//React
+import React, { Component } from 'react';
+import ViewPage from './ViewPage';
 
-      </Routes>
-    </Router>
-  );
+class App extends Component {
+  constructor() {
+    super()
+    this.state = {
+      user: ""
+    }
+  }
+
+  componentDidMount = () => {
+    /* const user = "" */
+    fetch('/api/userCheck')
+      .then(res => res.json())
+      .then(user => this.setState({ user }))
+
+
+  }
+
+
+  render() {
+
+    return (
+
+      <ViewPage />
+
+    );
+
+  }
+
 }
 
 export default App;

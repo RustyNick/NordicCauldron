@@ -22,8 +22,15 @@
   },
   "homepage": "https://github.com/RustyNick/NordicCauldron#readme",
   "dependencies": {
+    "axios": "^0.25.0",
+    "bcrypt": "^5.0.1",
     "concurrently": "^6.5.0",
+    "cookie-session": "^2.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^14.3.2",
     "express": "^4.17.2",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "stripe": "^8.201.0",
+    "uuid": "^8.3.2"
   }
 }

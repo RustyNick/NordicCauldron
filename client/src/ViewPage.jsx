@@ -129,16 +129,13 @@ function ViewPage() {
         if (!getID) {
             console.log("inget ID")
         } else {
-            console.log(getID)
             const body = { getID }
             const response = await makeRequest('http://localhost:3001/api/userCheck', "POST", body)
-            console.log(response)
             return response
         }
     }
     useEffect(async () => {
         const check = await userCheck()
-        console.log(check)
     })
 
 

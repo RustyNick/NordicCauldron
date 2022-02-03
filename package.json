@@ -1,10 +1,13 @@
 {
   "name": "nordiccauldron",
   "version": "1.0.0",
+  "engines": {
+    "node": "v16.x"
+  },
   "description": "examensarbete klass: WIE20G",
   "main": "index.js",
   "scripts": {
-    "heroku-postbuild": "cd client && npm install && npm install && npm run build",
+    "heroku-postbuild": "cd client && npm install && npm run build",
     "client-install": "cd client && npm install",
     "start": "node index.js",
     "server": "nodemon index.js",

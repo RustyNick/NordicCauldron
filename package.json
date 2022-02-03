@@ -1,6 +1,9 @@
 {
   "name": "nordiccauldron",
   "version": "1.0.0",
+  "engines": {
+    "node": "16.x"
+  },
   "description": "examensarbete klass: WIE20G",
   "main": "index.js",
   "scripts": {

@@ -24,7 +24,7 @@ const genreateRandomId = () => {
 
 app.use(cors())
 // ** MIDDLEWARE ** //
-const whitelist = ['http://localhost:3000', 'http://localhost:3001', 'https://nordiccauldron.herokuapp.com/', 'http://localhost:3000/api/create-checkout-session', "https://checkout.stripe.com/pay/", 'http://localhost:3001/api/session/verify']
+const whitelist = ['http://localhost:3001/api/v1/customers', 'http://localhost:3000', 'http://localhost:3001', 'https://nordiccauldron.herokuapp.com/', 'http://localhost:3000/api/create-checkout-session', "https://checkout.stripe.com/pay/", 'http://localhost:3001/api/session/verify']
 const corsOptions = {
     origin: function (origin, callback) {
         console.log("** Origin of request " + origin)
@@ -45,6 +45,7 @@ app.get("/api/product", (req, res) => {
     let data = JSON.parse(raw)
     const mydata = data.product
     res.json(mydata)
+    customerCart = {}
 });
 
 app.get("/api/user", (req, res) => {
@@ -74,6 +75,7 @@ app.post("/api/login", async (req, res) => {
     }
 
     if (req.session.id) {
+        console.log(user.id)
         return res.json("already logged in")
     }
 
@@ -83,10 +85,12 @@ app.post("/api/login", async (req, res) => {
     req.session.username = user.username
     req.session.userID = user.id
     req.session.loginDate = new Date()
+    req.session.maxAge = 24 * 60 * 60 * 1000 // 24 hours
     req.session.role = undefined //later installment for role
 
     const userInfo = [{ id: user.id, customer: user.customerId, role: user.role, username: req.session.username, email: user.email, prevOrder: user.previousOrder, cart: user.cart }];
     theCookie = req.session
+    console.log("Loggin", theCookie)
     res.json(userInfo)
 })
 
@@ -99,14 +103,29 @@ app.get('/api/login', (req, res) => {
 
 })
 
-app.get('/api/userCheck/', async (req, res) => {
-    if (theCookie !== null) {
-        console.log("The cookie", req.session)
-        return res.json(true)
-    } else {
+app.post('/api/userCheck/', async (req, res) => {
+    /* if (theCookie == null || theCookie == undefined) {
+        console.log("The cookie is", theCookie)
+
         return res.json(false)
+    } else if (theCookie !== null || theCookie !== undefined) {
+
+        console.log("The cookie is", theCookie)
+        return res.json({ theCookie })
+    } */
+    const userID = req.body.getID.map(item => { return item })
+    let raw = fs.readFileSync("myDB.json")
+    let data = JSON.parse(raw)
+    const users = data.user
+
+    if (users.find(user => user.id === userID))
+        console.log("funnet")
+    else {
+        console.log("inte funnet")
     }
 
+
+    res.json("pratar")
 })
 
 app.post('/api/getCart', (req, res) => {
@@ -128,18 +147,30 @@ app.delete("/api/delete", async (req, res) => {
     res.json(true)
 })
 
+stripeCustomerID = {}
+
+app.post('/api/v1/customers', async (req, res) => {
+    console.log("hi")
+    const customer = await stripe.customers.create({
+        description: 'min första kund',
+    });
+    stripeCustomerID = customer.id
+    console.log(stripeCustomerID)
+    res.json(stripeCustomerID)
+})
+
+
 app.post("/api/newUser", async (req, res) => {
+
     let raw = fs.readFileSync("myDB.json")
     let data = JSON.parse(raw)
-    //const myData = data.user
-    console.log("myData =>", data.user)
     if (data.user.find(user => user.email === req.body.email)) {
         return res.status(409).json("Username already in use")
     } else {
         const hashedPassword = await bcrypt.hash(req.body.password, 10)
         data.user.push({
             id: req.body.id,
-            customerId: "TESTID",
+            customerId: req.body.customerId,
             role: "customer",
             username: req.body.username,
             password: hashedPassword,
@@ -156,9 +187,71 @@ app.post("/api/newUser", async (req, res) => {
         res.status(200).json("user created")
     }
 })
-//fake products
+
+app.post('/api/recet', async (req, res) => {
+    const sessionid = req.body.sessionID
+    const cart = JSON.parse(req.body.cart)
+    const user = req.body.user
+
+    let raw = fs.readFileSync("myDB.json")
+    let data = JSON.parse(raw)
+    const products = data.product
+
+    let today = new Date()
+    let date = today.getFullYear() + " " + (today.getMonth() + 1) + "-" + today.getDate()
+
+    const customer = cart.map(item => {
+        return item.count
+    })
+
+    let order = {
+        theDate: date,
+        cart: cart.map(item => {
+            const storeItem = products.find(product => product.id == item.id)
+            return {
+
+                name: storeItem.name,
+                price: storeItem.price,
+                quantity: item.count,
+
+            }
+        }),
+        buyer: ""
+    }
+
+    console.log("user =>", req.body)
+    console.log("Order info =>", order)
+
+    if (data.user.find(user => user.email === req.body.email)) {
+        return res.json("Something")
+    } else {
+        data.user.push({
+        })
+        fs.writeFileSync("myDB.json", JSON.stringify(data))
+        const userId = req.body.id
+        res.status(200).json("user created")
+    }
 
 
+
+})
+
+//    console.log('Post thing från success', session.id)
+
+/*    try {
+       let raw = fs.readFileSync("recet.json")
+       let recet = JSON.parse(raw)
+       recet.push(order)
+       fs.writeFileSync("recet.json", JSON.stringify(kvitton))
+       res.json("sparat")
+       console.log("en order", order, req.body.number)
+   } catch (err) {
+ 
+   } */
+
+
+
+constcustomerCart = {}
 app.post("/create-checkout-session", async (req, res) => {
 
     let raw = fs.readFileSync("myDB.json")
@@ -182,9 +275,10 @@ app.post("/create-checkout-session", async (req, res) => {
                     quantity: item.quantity,
                 }
             }),
-            success_url: `${process.env.REACT_APP_CLIENT_URL}`,
+            success_url: `${process.env.REACT_APP_CLIENT_URL}SuccessPage`,
             cancel_url: `${process.env.REACT_APP_CLIENT_URL}`,
         })
+        console.log(session)
         // res.json({ url: session.url })
         res.json({ id: session.id })
     } catch (e) {
@@ -194,20 +288,28 @@ app.post("/create-checkout-session", async (req, res) => {
 })
 
 
-/* app.post("/api/verify", (req, res) => {
-    console.log("pratar med server")
-    const sessionId = req.body.sessionId;
-    console.log(sessionId)
-    res.json("pratar med server") */
-/*     const session = await stripe.checkout.sessions.retrive(sessionId);
-   if (session.payment_status == "paid") {
-       console.log("paid is true")
-       res.json(true)
-   }
-   res.json({ id: session.id });
-   console.log(session) */
-/* }) */
+app.post("/api/verify", async (req, res) => {
+    const sessionId = JSON.parse(req.body.theIdSession);
+    console.log("session id =>", sessionId)
 
+    const session = await stripe.checkout.sessions.retrieve(sessionId);
+
+    if (session.payment_status == "paid") {
+        //spara läplig info i json
+        res.json({ paid: true });
+    } else {
+        res.json({ paid: false });
+
+    }
+
+    console.log(session)
+})
+
+app.post('/api/images', (req, res) => {
+    res.writeHead(200,
+        { 'Content-type': 'image/jpg' })
+    res.json("skickat")
+})
 
 app.use(express.static('public'));
 app.use('/images', express.static('images'));

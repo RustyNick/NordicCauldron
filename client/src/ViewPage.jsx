@@ -8,12 +8,16 @@ import CartPage from './pages/CartPage';
 import ErrorPage from './pages/ErrorPage';
 import ProfilePage from './pages/ProfilePage';
 import Productpage from './pages/Productpage';
+import SuccessPage from './pages/SuccessPage';
+import KopVillkorPage from './pages/KopVillkorPage';
+
 //css & design
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { loadStripe } from '@stripe/stripe-js'
 import { useEffect } from 'react';
+import { WindowDock } from 'react-bootstrap-icons';
 
 const stripePromis = loadStripe(
     "pk_test_51KNH2DAoww90mq16yCRYzFYxFIJZzg8QBC5KueOyRvIqrdvHAfkzgSMGgU7H8iELM27KMtEUxDl1OQz11liw5AjS00rWAEtlJN"
@@ -81,19 +85,36 @@ function ViewPage() {
         return '_' + Math.random().toString(36).substr(2, 9);
     }
 
-    const createAccount = async (newAcc) => {
-        const body = {
-            id: genreateRandomId(),
-            username: newAcc.username,
-            password: newAcc.password,
-            email: newAcc.email,
-            adress: "Adress",
-            zip: "Zip",
-            city: "Stad",
-            country: "Land",
-        }
+    const stripeCustomerID = async () => {
+        const response = await fetch('http://localhost:3001/api/v1/customers', {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: ""
+        })
+        let result = await response.json()
+        return result
+    }
 
-        let response = await makeRequest("http://localhost:3001/api/newUser", "POST", body)
+    const createAccount = async (newAcc) => {
+        let customerID = await stripeCustomerID()
+
+        console.log(customerID)
+        let response = await fetch("http://localhost:3001/api/newUser", {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({
+                id: genreateRandomId(),
+                customerId: customerID,
+                username: newAcc.username,
+                password: newAcc.password,
+                email: newAcc.email,
+                adress: "Adress",
+                zip: "Zip",
+                city: "Stad",
+                country: "Land"
+
+            })
+        })
         if (response === 200) {
             console.log("success")
         } else {
@@ -101,6 +122,27 @@ function ViewPage() {
         }
 
     }
+
+
+    const userCheck = async (user) => {
+        const getID = JSON.parse(localStorage.getItem("ID"))
+        if (!getID) {
+            console.log("inget ID")
+        } else {
+            console.log(getID)
+            const body = { getID }
+            const response = await makeRequest('http://localhost:3001/api/userCheck', "POST", body)
+            console.log(response)
+            return response
+        }
+    }
+    useEffect(async () => {
+        const check = await userCheck()
+        console.log(check)
+    })
+
+
+
     const LoginTest = async (details) => {
 
         const body = {
@@ -109,7 +151,7 @@ function ViewPage() {
         }
 
         let response = await makeRequest("http://localhost:3001/api/login", "POST", body)
-        console.log(response)
+        console.log("the login response", response)
 
         if (response === false) {
             console.log("details do not match")
@@ -123,7 +165,13 @@ function ViewPage() {
                 name: response[0].username,
                 email: response[0].email
             })
+
         }
+        const customerID = response.map(item => {
+            return item.id
+        })
+        localStorage.setItem("ID", JSON.stringify(customerID))
+        console.log("customerID", customerID)
     }
 
     const emptyCart = async () => {
@@ -159,6 +207,7 @@ function ViewPage() {
             let product = { id: item.id, quantity: item.count }
             return product
         })
+        const customerCart = localStorage.setItem("cart", JSON.stringify(cart))
 
         fetch('http://localhost:3001/create-checkout-session', {
             method: "POST",
@@ -175,15 +224,38 @@ function ViewPage() {
             const idSession = JSON.stringify(id)
             setSessionID(idSession)
             stripe.redirectToCheckout({ sessionId: id })
-
-            /* .then(({ url }) => {
-                console.log(url)
-                window.location = url */
         }).catch(e => {
             console.error(e.error)
         })
 
     }
+
+    const verify = async () => {
+        try {
+            const theIdSession = sessionID
+            if (!theIdSession) {
+                throw new error("no session id to verify")
+
+            }
+
+            const response = await fetch('http://localhost:3001/api/verify', {
+                method: "POST",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ theIdSession: theIdSession })
+            });
+            const { paid } = await response.json()
+            return paid
+
+        } catch (err) {
+            console.error(err);
+            return false
+        }
+
+    }
+
+
+
+
     async function makeRequest(url, method, body) {
         try {
             const response = await fetch(url, {
@@ -204,7 +276,6 @@ function ViewPage() {
 
     return (
         <Router>
-
             <Header cart={cart} user={user} />
             <Routes>
                 <Route path='/' element={<HomePage onGetProduct={getProducts} product={product} cart={cart} onAddToCart={addToCart} />} />
@@ -213,7 +284,11 @@ function ViewPage() {
 
                 <Route path='/CartPage' element={<CartPage checkout={checkout} cart={summarizeCart(cart)} onAddToCart={addToCart} onRemoveItem={removeItem} onEmptyCart={emptyCart} />} />
 
+                <Route path="/SuccessPage" element={<SuccessPage user={user} sessionID={sessionID} setSessionID={setSessionID} />} />
+
                 <Route path='/Productpage' element={<Productpage />} />
+
+                <Route path='/KopVillkorPage' element={<KopVillkorPage />}></Route>
 
                 <Route path='*' element={<ErrorPage />} />
 

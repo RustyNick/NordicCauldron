@@ -9,7 +9,7 @@ const Cart = ({ checkout, cart, onAddToCart, onRemoveItem, onEmptyCart }) => {
 
     const summary = (cart) => {
         const itemprice = cart.map(item => {
-            let price = item.price * item.count
+            let price = item.storeprice * item.count
             return price
         });
         let summary = itemprice.reduce((a, b) => a + b, 0)

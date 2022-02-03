@@ -3,6 +3,7 @@ import React from 'react';
 function KopVillkorPage() {
     return (
         <div>
+
             Priser
             Samtliga priser är inklusive moms och i svenska kronor (SEK). Vi reserverar oss för eventuella fel i prislistan.
 

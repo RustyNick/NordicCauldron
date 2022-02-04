@@ -19,7 +19,7 @@ class ProfilePage extends React.Component {
                     <div>
                         <h2>Welcome <span>{this.props.user.name}</span></h2>
 
-                        <button className="logInAndOut-button" onClick={this.props.logout}>Logout</button>
+                        <button className="logInAndOut-button" onClick={() => { this.props.logout() }}>Logout</button>
                     </div>
                 ) : (
                     <LoginForm createAccount={this.props.createAccount} LoginTest={this.props.LoginTest} error={this.props.error} />

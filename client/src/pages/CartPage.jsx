@@ -109,11 +109,6 @@ const Cart = ({ checkout, cart, onAddToCart, onRemoveItem, onEmptyCart }) => {
 
 
                     )}
-                    {/* <button className='cart-button'
-                        onClick={() => { console.log('köp', cart, summary(cart)) }
-                    }
-                    >Köp
-                </button> */}
                     <span>
 
                     </span>

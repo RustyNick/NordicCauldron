@@ -10,8 +10,9 @@ function Footer() {
             <div className='footer-inner-box'>
                 <Link to="/KopVillkorPage" > Köpvillkor </Link>
             </div>
-            <div className='footer-inner-box'>box 2</div>
-            <div className='footer-inner-box'>box 3</div>
+            <div className='footer-inner-box'>
+                <Link to="/OmCookies" >Om cookies</Link></div>
+            <div className='footer-inner-box'></div>
         </div>
     )
 }

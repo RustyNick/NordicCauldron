@@ -10,6 +10,7 @@ import ProfilePage from './pages/ProfilePage';
 import Productpage from './pages/Productpage';
 import SuccessPage from './pages/SuccessPage';
 import KopVillkorPage from './pages/KopVillkorPage';
+import OmCookies from './pages/OmCookies'
 
 //css & design
 import './App.css';
@@ -98,7 +99,6 @@ function ViewPage() {
     const createAccount = async (newAcc) => {
         let customerID = await stripeCustomerID()
 
-        console.log(customerID)
         let response = await fetch("http://localhost:3001/api/newUser", {
             method: "POST",
             headers: { "content-type": "application/json" },
@@ -116,27 +116,27 @@ function ViewPage() {
             })
         })
         if (response === 200) {
-            console.log("success")
+            return true
         } else {
-            console.log(response)
+            return false
         }
 
     }
 
 
-    const userCheck = async (user) => {
-        const getID = JSON.parse(localStorage.getItem("ID"))
-        if (!getID) {
-            console.log("inget ID")
-        } else {
-            const body = { getID }
-            const response = await makeRequest('http://localhost:3001/api/userCheck', "POST", body)
-            return response
-        }
-    }
-    useEffect(async () => {
-        const check = await userCheck()
-    })
+    /*    const userCheck = async (user) => {
+           const getID = JSON.parse(localStorage.getItem("ID"))
+           if (!getID) {
+               console.log("inget ID")
+           } else {
+               const body = { getID }
+               const response = await makeRequest('http://localhost:3001/api/userCheck', "POST", body)
+               return response
+           }
+       }
+       useEffect(async () => {
+           const check = await userCheck()
+       }) */
 
 
 
@@ -148,15 +148,15 @@ function ViewPage() {
         }
 
         let response = await makeRequest("http://localhost:3001/api/login", "POST", body)
-        console.log("the login response", response)
+
 
         if (response === false) {
-            console.log("details do not match")
             setError('Details do not match')
+            return
         } else if (response === "already logged in") {
-            console.log("you are logged in")
+            return
         } else {
-            console.log('logged in')
+
 
             setUser({
                 name: response[0].username,
@@ -168,7 +168,6 @@ function ViewPage() {
             return item.id
         })
         localStorage.setItem("ID", JSON.stringify(customerID))
-        console.log("customerID", customerID)
     }
 
     const emptyCart = async () => {
@@ -286,6 +285,7 @@ function ViewPage() {
                 <Route path='/Productpage' element={<Productpage />} />
 
                 <Route path='/KopVillkorPage' element={<KopVillkorPage />}></Route>
+                <Route path='/OmCookies' element={<OmCookies />}></Route>
 
                 <Route path='*' element={<ErrorPage />} />
 

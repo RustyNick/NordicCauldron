@@ -18,7 +18,7 @@ class ProfilePage extends React.Component {
                 {(this.props.user.name !== "") ? (
                     <div>
                         <h2>Welcome <span>{this.props.user.name}</span></h2>
-                        {console.log(this.props.user)}
+
                         <button className="logInAndOut-button" onClick={this.props.logout}>Logout</button>
                     </div>
                 ) : (

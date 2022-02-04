@@ -5,11 +5,10 @@ import { Link } from 'react-router-dom';
 const source = "/images/"
 
 const ItemProduct = ({ item }) => (
-    < div style={{ minHeight: '300px', maxWidth: "300px", overflow: 'hidden', }}>
+    < div className="product-box">
 
-        <div
-            style={{ width: '100%', height: '100%', minHeight: '260px', minWidth: '300px', backgroundColor: '#FFF', display: 'flex', justifyContent: 'center', objectFit: 'contain', }}>
-            <img style={{ objectFit: 'fill', width: '100%', height: '100%', }} src={source + item.img} alt={item.img} />
+        <div className='product-inner-content'>
+            <img className='img-container' src={source + item.img} alt={item.img} />
         </div>
         <div
             style={{

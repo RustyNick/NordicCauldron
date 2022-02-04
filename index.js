@@ -221,8 +221,9 @@ app.post('/api/recet', async (req, res) => {
 
     console.log("user =>", req.body)
     console.log("Order info =>", order)
+    res.json(order)
 
-    if (data.user.find(user => user.email === req.body.email)) {
+    /* if (data.user.find(user => user.email === req.body.email)) {
         return res.json("Something")
     } else {
         data.user.push({
@@ -230,7 +231,7 @@ app.post('/api/recet', async (req, res) => {
         fs.writeFileSync("myDB.json", JSON.stringify(data))
         const userId = req.body.id
         res.status(200).json("user created")
-    }
+    } */
 
 
 
@@ -266,7 +267,7 @@ app.post("/create-checkout-session", async (req, res) => {
                 const storeItem = products.find(product => product.id == item.id)
                 return {
                     price_data: {
-                        currency: "usd",
+                        currency: "sek",
                         product_data: {
                             name: storeItem.name,
                         },

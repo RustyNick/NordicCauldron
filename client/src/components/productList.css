@@ -55,6 +55,25 @@
     transition: 0.8s;
 }
 
+.product-box{
+    max-Width:300px;
+    overflow: hidden;
+}
+
+.product-inner-content{
+    background-Color:#FFF;
+    display:flex;
+    justify-Content: center;
+    overflow:hidden;
+
+}
+.img-container{
+    object-Fit:cover; 
+    width: 100%;
+    height:100%;
+
+}
+
 @media only screen and (max-width: 600px) {
     .list-ul{
        width:100%;

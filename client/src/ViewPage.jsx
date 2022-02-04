@@ -17,8 +17,6 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { loadStripe } from '@stripe/stripe-js'
-import { useEffect } from 'react';
-import { WindowDock } from 'react-bootstrap-icons';
 
 const stripePromis = loadStripe(
     "pk_test_51KNH2DAoww90mq16yCRYzFYxFIJZzg8QBC5KueOyRvIqrdvHAfkzgSMGgU7H8iELM27KMtEUxDl1OQz11liw5AjS00rWAEtlJN"
@@ -37,18 +35,16 @@ const summarizeCart = (cart) => {
     return Object.values(groupItems);
 };
 
-function ViewPage() {
+const state = {
+    list: []
+}
 
-    const state = {
-        list: []
-    }
+function ViewPage() {
     const [user, setUser] = useState({ name: "", email: "", cart: [], prevOrder: [] });
     const [error, setError] = useState("");
     const [product, setProduct] = useState(state.list)
     const [cart, setCart] = useState([])
     const [sessionID, setSessionID] = useLocalStorage("session", "id")
-
-
 
     function useLocalStorage(key, initialValue) {
         const [storedValue, setStoredValue] = useState(() => {
@@ -70,8 +66,12 @@ function ViewPage() {
                 console.log(error);
             }
         };
+
         return [storedValue, setValue];
     }
+
+
+
 
 
 

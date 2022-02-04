@@ -17,6 +17,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { loadStripe } from '@stripe/stripe-js'
+import UseLocalStorgae from './components/UseLocalStorgae';
 
 const stripePromis = loadStripe(
     "pk_test_51KNH2DAoww90mq16yCRYzFYxFIJZzg8QBC5KueOyRvIqrdvHAfkzgSMGgU7H8iELM27KMtEUxDl1OQz11liw5AjS00rWAEtlJN"
@@ -44,7 +45,7 @@ function ViewPage() {
     const [error, setError] = useState("");
     const [product, setProduct] = useState(state.list)
     const [cart, setCart] = useState([])
-    const [sessionID, setSessionID] = useLocalStorage("session", "id")
+    const [sessionID, setSessionID] = useState(<UseLocalStorgae />)
 
     function useLocalStorage(key, initialValue) {
         const [storedValue, setStoredValue] = useState(() => {
@@ -280,7 +281,7 @@ function ViewPage() {
 
                 <Route path='/CartPage' element={<CartPage checkout={checkout} cart={summarizeCart(cart)} onAddToCart={addToCart} onRemoveItem={removeItem} onEmptyCart={emptyCart} />} />
 
-                <Route path="/SuccessPage" element={<SuccessPage user={user} sessionID={sessionID} setSessionID={setSessionID} />} />
+                <Route path="/SuccessPage" element={<SuccessPage user={user} />} />
 
                 <Route path='/Productpage' element={<Productpage />} />
 

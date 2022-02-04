@@ -33,7 +33,6 @@
     "dotenv": "^14.3.2",
     "express": "^4.17.2",
     "nodemon": "^2.0.15",
-    "react-router-dom": "^6.2.1",
     "stripe": "^8.201.0",
     "uuid": "^8.3.2"
   }
